@@ -1,4 +1,4 @@
-# jasmine-json-test-reporter
+# jasmine-json-reporter-delux
 
 [Jasmine Custom Reporter Documentation](http://jasmine.github.io/2.1/custom_reporter.html)
 
@@ -15,11 +15,11 @@ Protractor does technically provide an option to export results as JSON using th
 ## How to use
 
 ### Install
-`npm install jasmine-json-test-reporter --save-dev`
+`npm install jasmine-json-reporter-delux --save-dev`
 
 ### Jasmine Usage
 ```javascript
-var JSONReporter = require('jasmine-json-test-reporter');
+var JSONReporter = require('jasmine-json-reporter-delux');
 jasmine.getEnv().addReporter(new JSONReporter({
 	file: 'jasmine-test-results.json',
 	beautify: true,
@@ -30,7 +30,7 @@ jasmine.getEnv().addReporter(new JSONReporter({
 ### Protractor/Jasmine Usage
 ```javascript
 // in Protractor conf
-var JSONReporter = require('jasmine-json-test-reporter');
+var JSONReporter = require('jasmine-json-reporter-delux');
 
 ...
 
