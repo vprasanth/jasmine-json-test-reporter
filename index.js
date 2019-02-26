@@ -28,7 +28,7 @@ function reporter(opts) {
 
   this.jasmineDone = function() {
     var t1 = new Date().getTime();
-    masterResults['summary'] = { runtime: 0 };
+    masterResults['summary'] = { runTime: 0 };
     masterResults.summary.runTime = t1-t0;
     var resultsOutput = options.beautify ?
       JSON.stringify(masterResults, null, options.indentationLevel) :
