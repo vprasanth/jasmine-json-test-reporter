@@ -1,44 +1,52 @@
 var fs = require('fs')
 
 var defaultOpts = {
-	file: 'jasmine-test-results.json',
-	beautify: true,
-	indentationLevel: 4 // used if beautify === true
+  file: 'jasmine-test-results.json',
+  beautify: true,
+  indentationLevel: 4 // used if beautify === true
 };
 
 function reporter(opts) {
-	var options = shallowMerge(defaultOpts, typeof opts === 'object' ? opts : {});
-	var specResults = [];
-	var masterResults = Object.create(null);
+  var options = shallowMerge(defaultOpts, typeof opts === 'object' ? opts : {});
+  var specResults = [];
+  var masterResults = Object.create(null);
+  var t0;
 
-	this.suiteDone = function(suite) {
-		suite.specs = specResults;
-		masterResults[suite.id] = suite;
-		specResults = [];
-	};
+  this.jasmineStarted = function () {
+    t0 = new Date().getTime();
+  }
 
-	this.specDone = function(spec) {
-		specResults.push(spec);
-	};
+  this.suiteDone = function(suite) {
+    suite.specs = specResults;
+    masterResults[suite.id] = suite;
+    specResults = [];
+  };
 
-	this.jasmineDone = function() {
-		var resultsOutput = options.beautify ?
-			JSON.stringify(masterResults, null, options.indentationLevel) :
-			JSON.stringify(masterResults);
+  this.specDone = function(spec) {
+    specResults.push(spec);
+  };
 
-		fs.writeFileSync(options.file, resultsOutput);
-	};
+  this.jasmineDone = function() {
+    var t1 = new Date().getTime();
+    masterResults['summary'] = { runtime: 0 };
+    masterResults.summary.runTime = t1-t0;
+    var resultsOutput = options.beautify ?
+      JSON.stringify(masterResults, null, options.indentationLevel) :
+      JSON.stringify(masterResults);
+
+    fs.writeFileSync(options.file, resultsOutput);
+  };
 };
 
 function shallowMerge(obj1, obj2) {
-	var mergedObj = {};
+  var mergedObj = {};
 
-	Object.keys(obj1).forEach(function(key) {
-		if (!obj2[key]) mergedObj[key] = obj1[key];
-		else mergedObj[key] = obj2[key];
-	});
+  Object.keys(obj1).forEach(function(key) {
+    if (!obj2[key]) mergedObj[key] = obj1[key];
+    else mergedObj[key] = obj2[key];
+  });
 
-	return mergedObj;
+  return mergedObj;
 };
 
 module.exports = reporter;

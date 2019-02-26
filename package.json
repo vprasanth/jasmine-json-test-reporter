@@ -1,16 +1,21 @@
 {
-  "name": "jasmine-json-test-reporter",
-  "version": "1.0.0-beta",
+  "name": "jasmine-json-reporter-delux",
+  "version": "1.0.0",
   "description": "Write Jasmine test results to disk in JSON format",
   "main": "index.js",
-  "keywords": [
-    "JSON",
-    "jasmine",
-    "protractor",
-    "reporter",
-    "tests"
+  "keywords": ["JSON", "jasmine", "protractor", "reporter", "tests"],
+  "contributors": [
+    {
+      "name": "Andrew Levine",
+      "email": "theandrewtizer@gmail.com",
+      "url": "https://github.com/drewml"
+    },
+    {
+      "name": "Prasanth Vaaheeswaran",
+      "email": "prasanthv@icloud",
+      "url": "https://vprasanth.com"
+    }
   ],
-  "author": "Andrew Levine <theandrewtizer@gmail.com> (https://github.com/drewml)",
   "license": "MIT",
   "repository": {
     "type": "git",
